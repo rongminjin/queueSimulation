@@ -11,13 +11,14 @@ using namespace std;
 const int simulationTime = 43200; // 12 hrs * 60 min * 60 sec
 
 struct Customer{
-    
+private:
     int firingTime; // when they enqueue
     
     int duration; // number of seconds it will take to serve them
     
     int beginningToBeHelped; // time at which they begin to work with cashier
-    
+
+public:
     Customer() { // default constructor to make compiler happy
         firingTime = -1;
         duration = -1;
@@ -33,7 +34,7 @@ struct Customer{
         firingTime = input;
     }
     
-    int getFiringTime () {
+    int getFiringTime () const {
         return firingTime;
     }
     
@@ -56,7 +57,7 @@ struct Customer{
 };
 
 struct Employee{
-    
+private:
     Customer currentCustomer;
     
     bool available; // true if not helping anyone, false if busy
@@ -64,7 +65,7 @@ struct Employee{
     int firingTime; // when they start helping the current customer
     
     int finishTime; // when they stop helping the customer
-    
+public:
     Employee() {
         available = true;
         firingTime = -1;
@@ -119,7 +120,7 @@ struct Employee{
 
 // overloading < so that Customers can be compared (required for priority_queue)
 bool operator<(const Customer& lhs, const Customer& rhs) {
-    return lhs.firingTime > rhs.firingTime;
+    return lhs.getFiringTime() > rhs.getFiringTime();
 }
 
 // Helper function to calculate percentile
