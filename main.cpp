@@ -265,13 +265,11 @@ void simulateSupermarket(vector<struct Employee> &allCashiers, vector<struct Cus
 int main(int argc, const char * argv[]) {
     
     // Commandline arguments
-//    float arrivalRate = stof(argv[1]); // number of customers that arrive per minute
-//    float serviceTime = stof(argv[2]); // max service time in minutes
-//    float randomSeed = stof(argv[3]); // seeeds the random number generator
+    float arrivalRate = stof(argv[1]); // number of customers that arrive per minute
+    float serviceTime = stof(argv[2]); // max service time in minutes
+    float randomSeed = stof(argv[3]); // seeeds the random number generator
     
-    float arrivalRate = stof("3.11"); // number of customers that arrive per minute
-    float serviceTime = stof("3"); // max service time in minutes
-    float randomSeed = stof("34454");
+    
     
     // Initialization
     srand (randomSeed);
@@ -286,7 +284,7 @@ int main(int argc, const char * argv[]) {
     vector<struct Customer> allBankCustomers;
     for (int time = 0; time < 43200; time++) { // 12 hours -> 43200 seconds
         // on average, the probability of someone arriving each second = (1 min / arrivalRate person:min) * (60 seconds / 1 min):
-        int arrivalRandomizer = rand() % (int)(60 / arrivalRate) + 1; // consider of arrivalRate =31, 61, 131) 
+        int arrivalRandomizer = rand() % (int)(60 / arrivalRate) + 1;
         if (arrivalRandomizer == 2) { // someone arrives (2 is arbitrary)
             int randomServiceDuration = rand() % (int)(serviceTime * 60) + 1;
             allBankCustomers.push_back(Customer(time, randomServiceDuration));
